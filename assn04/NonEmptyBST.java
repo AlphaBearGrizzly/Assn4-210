@@ -54,6 +54,7 @@ public class NonEmptyBST<T extends Comparable<T>> implements BST<T> {
 		if ((_left == null) && (_right == null)) {  // case 1. leaf
 			_element = null;
 		} else if ((_left == null)) {  // case 2a. node to delete only has a right child
+			element = null;
 			_element = _right;
 		} else if ((_right == null)) {  // case 2b. node to delete only has a left child
 			_element = _left; //This is reassigns so that _element disappears!
@@ -66,9 +67,9 @@ public class NonEmptyBST<T extends Comparable<T>> implements BST<T> {
 
 
 
-	BST<T> findMinNode(successorFinder) {    // returns smallest node in tree starting at node
+	BST<T> findMinNode(BST<T> thing) {    // returns smallest node in tree starting at node
 		if (_left == null) {
-			return (node);
+			return (thing);
 		} else {
 			return (findMinNode(_left));
 		}
@@ -76,7 +77,6 @@ public class NonEmptyBST<T extends Comparable<T>> implements BST<T> {
 	}
 
 
-// recalling the function ONTHATBST enables us to move along
 		// Deleting function above
 
 
@@ -87,10 +87,12 @@ public class NonEmptyBST<T extends Comparable<T>> implements BST<T> {
 	// TODO: printPreOrderTraversal
 	@Override
 	public void printPreOrderTraversal() {
+		System.out.print(this.getElement());
+		this = this.getLeft();
 
-		// Needs to go from root (_element), and print each left, then start from the nearest split, and work down the right side,
-		// until exhausted (ie equals null)
-		}
+
+
+	}
 
 
 
@@ -108,8 +110,22 @@ public class NonEmptyBST<T extends Comparable<T>> implements BST<T> {
 	@Override
 	public void printBreadthFirstTraversal() {
 
-		// goes all the way downtheleft side, then starting with leaf ends, does each _left and _right
+		// goes like a wave over each line, from left to right
 
+		Queue<BST<T>> myQueue = new LinkedList<BST<T>>();
+		BST<T> myCur;
+		myQueue.add(this);
+		while (myQueue.isEmpty() == false){
+			myCur = myQueue.poll();
+			if(myCur.getLeft().isEmpty() == false){
+				myQueue.add(myCur.getLeft());
+			}
+			if(myCur.getRight().isEmpty() == false){
+				myQueue.add(myCur.getRight());
+			}
+
+			System.out.print(myCur.getElement() + " ");
+		}
 
 	}
 
