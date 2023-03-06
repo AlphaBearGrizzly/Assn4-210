@@ -50,40 +50,21 @@ public class NonEmptyBST<T extends Comparable<T>> implements BST<T> {
 		deleteGivenNode(element);         // helper fun. Deletes specific node.
 	}
 
-	void deleteGivenNode(T element) {            // helper fun. Deletes specific node
+	void deleteGivenNode(T element) {            // helper fun. Deletes specific node. Does this give us a memory location?
 		if ((_left == null) && (_right == null)) {  // case 1. leaf
-			changeChild(element, null);
+			_element = null;
 		} else if ((_left == null)) {  // case 2a. node to delete only has a right child
-			changeChild(element, _right);
+			_element = _right;
 		} else if ((_right == null)) {  // case 2b. node to delete only has a left child
-			changeChild(T element, _left);
+			_element = _left; //This is reassigns so that _element disappears!
 		} else {   // case 3. node has 2 children. Lets use successor from right.
 			BST<T> successor = findMinNode(_right);
 			element = successor;
-			deleteGivenNode(successor);
+			deleteGivenNode(successor); //here our recursion
 		}
 	}
 
-	void changeChild(T element, _side) {    // changes parent to point at new child
-		if (currentChild._parent == null) {
-			_root = newChild;
-			if (newChild != null) {
-				newChild._parent = null;
-			}
-		} else if (currentChild._parent._leftChild == currentChild) {
-			currentChild._parent._leftChild = _side;
-			if (newChild != null) {
-				newChild._parent = currentChild._parent;
-			}
-		} else if (currentChild._parent._rightChild == currentChild) {
-			currentChild._parent._rightChild = newChild;
-			if (newChild != null) {
-				newChild._parent = currentChild._parent;
-			}
-		} else {
-			System.out.println("Exception error in method 'changeParent'");
-		}
-	}
+
 
 	BST<T> findMinNode(successorFinder) {    // returns smallest node in tree starting at node
 		if (_left == null) {
@@ -95,7 +76,7 @@ public class NonEmptyBST<T extends Comparable<T>> implements BST<T> {
 	}
 
 
-
+// recalling the function ONTHATBST enables us to move along
 		// Deleting function above
 
 
@@ -106,29 +87,14 @@ public class NonEmptyBST<T extends Comparable<T>> implements BST<T> {
 	// TODO: printPreOrderTraversal
 	@Override
 	public void printPreOrderTraversal() {
-		traversingMethod();
-		public void traversingMethod(){
-			//
-		System.out(_element);
-			if(_left != null){
-				_element =  _left;
-				System.out(_element);
-				traversingMethod;
-			}
-			//now we are at the bottom
-			if(_left == null){
-				while (_right = null){
-					System.out(_right);
-					_element = _right;
-				}
 
-			}
-			System.out()
+		// Needs to go from root (_element), and print each left, then start from the nearest split, and work down the right side,
+		// until exhausted (ie equals null)
 		}
 
 
 
-	}
+
 
 	// TODO: printPostOrderTraversal
 	@Override
@@ -142,7 +108,7 @@ public class NonEmptyBST<T extends Comparable<T>> implements BST<T> {
 	@Override
 	public void printBreadthFirstTraversal() {
 
-
+		// goes all the way downtheleft side, then starting with leaf ends, does each _left and _right
 
 
 	}
