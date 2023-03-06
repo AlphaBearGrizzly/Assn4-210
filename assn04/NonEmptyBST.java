@@ -1,5 +1,5 @@
 package assn04;
-
+//credit to dr ghani's code
 
 import java.util.LinkedList;
 import java.util.Queue;
@@ -21,23 +21,84 @@ public class NonEmptyBST<T extends Comparable<T>> implements BST<T> {
 	public BST<T> insert(T element) {
 		// one traverses i suppose through the Getters?
 		//element here works as a cur basically
-		while(_right != null  && _left != null){
-			if (T >= _element){
-				_element = getRight();
-			}
-			if (T < _element){
-				_left = T;
-				_element = getLeft();
-			}
-		}
-		if(_right == null && _left != null){
 
+			if (_element < _left) {     // insert on right
+				if (_right == null) {
+					_right = T;
+				} else {
+					insert(T);
+				}
+			}
+			else {                // insert on left
+				if (_left == null) {
+					_left = T;
+				} else {
+					insert(T);
+				}
+			}
 		}
+	return BST<T>;
 	}
 
 	// TODO: remove
 	@Override
 	public BST<T> remove(T element) {
+// deleting function below
+		deleteGivenNode(T element);         // helper fun. Deletes specific node.
+	}
+
+	void deleteGivenNode(T element) {            // helper fun. Deletes specific node
+		if ((_left == null) && (_right == null)) {  // case 1. leaf
+			changeChild(element, null);
+		} else if ((_left == null)) {  // case 2a. node to delete only has a right child
+			changeChild(element, _right);
+		} else if ((_right == null)) {  // case 2b. node to delete only has a left child
+			changeChild(node, node._leftChild);
+		} else {   // case 3. node has 2 children. Lets use successor from right.
+			Node successor = findMinNode(node._rightChild);
+			node._value = successor._value;
+			deleteGivenNode(successor);
+		}
+	}
+
+	void changeChild(Node currentChild, Node newChild){    // changes parent to point at new child
+		if (currentChild._parent == null) {
+			_root = newChild;
+			if (newChild != null) {
+				newChild._parent = null;
+			}
+		}
+		else if (currentChild._parent._leftChild == currentChild) {
+			currentChild._parent._leftChild = newChild;
+			if (newChild != null) {
+				newChild._parent = currentChild._parent;
+			}
+		}
+		else if (currentChild._parent._rightChild == currentChild) {
+			currentChild._parent._rightChild = newChild;
+			if (newChild != null) {
+				newChild._parent = currentChild._parent;
+			}
+		}
+		else {
+			System.out.println("Exception error in method 'changeParent'");
+		}
+	}
+
+	Node findMinNode(Node node){    // returns smallest node in tree starting at node
+		if (node._leftChild == null)  {
+			return (node);
+		}
+		else {
+			return (findMinNode(node._leftChild));
+		}
+	}
+
+
+		// Deleting function above
+
+
+
 
 	}
 
@@ -59,6 +120,7 @@ public class NonEmptyBST<T extends Comparable<T>> implements BST<T> {
 	// TODO: printBreadthFirstTraversal
 	@Override
 	public void printBreadthFirstTraversal() {
+
 
 
 
