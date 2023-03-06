@@ -16,29 +16,32 @@ public class NonEmptyBST<T extends Comparable<T>> implements BST<T> {
 		_element = element;
 	}
 
+
+
 	// TODO: insert
 	@Override
 	public BST<T> insert(T element) {
 		// one traverses i suppose through the Getters?
 		//element here works as a cur basically
-
-			if (_element < _left) {     // insert on right
+		T.compareTo
+		if (_element < _left) {     // insert on right
 				if (_right == null) {
-					_right = T;
+					_right = insert(T);
 				} else {
 					insert(T);
 				}
 			}
 			else {                // insert on left
 				if (_left == null) {
-					_left = T;
+					_left = insert(T);
 				} else {
 					insert(T);
 				}
 			}
+		return BST<T>;
 		}
-	return BST<T>;
-	}
+
+
 
 	// TODO: remove
 	@Override
@@ -100,11 +103,27 @@ public class NonEmptyBST<T extends Comparable<T>> implements BST<T> {
 
 
 
-	}
+
 
 	// TODO: printPreOrderTraversal
 	@Override
 	public void printPreOrderTraversal() {
+		traversingMethod();
+		public void traversingMethod(){
+			//
+		System.out(_element);
+			if(_left != null){
+				_element =  _left;
+				System.out(_element);
+				traversingMethod;
+			}
+			//now we are at the bottom
+			if(_left == null){
+				System.out()
+			}
+			System.out()
+		}
+
 
 
 	}
