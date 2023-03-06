@@ -17,37 +17,37 @@ public class NonEmptyBST<T extends Comparable<T>> implements BST<T> {
 	}
 
 
-
 	// TODO: insert
 	@Override
 	public BST<T> insert(T element) {
 		// one traverses i suppose through the Getters?
 		//element here works as a cur basically
-		T.compareTo
-		if (_element < _left) {     // insert on right
-				if (_right == null) {
-					_right = insert(T);
-				} else {
-					insert(T);
-				}
+		int result = _element.compareTo(element);
+		if (result <= 0) {     // insert on right, or if they are equal
+			if (_right.isEmpty()) {
+				_right = new NonEmptyBST<T>(element);
+			} else {
+				_right = _right.insert(element);
 			}
-			else {                // insert on left
-				if (_left == null) {
-					_left = insert(T);
-				} else {
-					insert(T);
-				}
+		} else if (result > 0) {            // insert on left
+			if (_left.isEmpty()) {
+				_left = new NonEmptyBST<T>(element);
+			} else {
+				_left = _left.insert(element);
 			}
-		return BST<T>;
+
 		}
 
+		// if result = 0,inserting with euivalence to root
+		return this;
+	}
 
 
 	// TODO: remove
 	@Override
 	public BST<T> remove(T element) {
 // deleting function below
-		deleteGivenNode(T element);         // helper fun. Deletes specific node.
+		deleteGivenNode(element);         // helper fun. Deletes specific node.
 	}
 
 	void deleteGivenNode(T element) {            // helper fun. Deletes specific node
@@ -56,46 +56,44 @@ public class NonEmptyBST<T extends Comparable<T>> implements BST<T> {
 		} else if ((_left == null)) {  // case 2a. node to delete only has a right child
 			changeChild(element, _right);
 		} else if ((_right == null)) {  // case 2b. node to delete only has a left child
-			changeChild(node, node._leftChild);
+			changeChild(T element, _left);
 		} else {   // case 3. node has 2 children. Lets use successor from right.
-			Node successor = findMinNode(node._rightChild);
-			node._value = successor._value;
+			BST<T> successor = findMinNode(_right);
+			element = successor;
 			deleteGivenNode(successor);
 		}
 	}
 
-	void changeChild(Node currentChild, Node newChild){    // changes parent to point at new child
+	void changeChild(T element, _side) {    // changes parent to point at new child
 		if (currentChild._parent == null) {
 			_root = newChild;
 			if (newChild != null) {
 				newChild._parent = null;
 			}
-		}
-		else if (currentChild._parent._leftChild == currentChild) {
-			currentChild._parent._leftChild = newChild;
+		} else if (currentChild._parent._leftChild == currentChild) {
+			currentChild._parent._leftChild = _side;
 			if (newChild != null) {
 				newChild._parent = currentChild._parent;
 			}
-		}
-		else if (currentChild._parent._rightChild == currentChild) {
+		} else if (currentChild._parent._rightChild == currentChild) {
 			currentChild._parent._rightChild = newChild;
 			if (newChild != null) {
 				newChild._parent = currentChild._parent;
 			}
-		}
-		else {
+		} else {
 			System.out.println("Exception error in method 'changeParent'");
 		}
 	}
 
-	Node findMinNode(Node node){    // returns smallest node in tree starting at node
-		if (node._leftChild == null)  {
+	BST<T> findMinNode(successorFinder) {    // returns smallest node in tree starting at node
+		if (_left == null) {
 			return (node);
+		} else {
+			return (findMinNode(_left));
 		}
-		else {
-			return (findMinNode(node._leftChild));
-		}
+		return this;
 	}
+
 
 
 		// Deleting function above
@@ -119,7 +117,11 @@ public class NonEmptyBST<T extends Comparable<T>> implements BST<T> {
 			}
 			//now we are at the bottom
 			if(_left == null){
-				System.out()
+				while (_right = null){
+					System.out(_right);
+					_element = _right;
+				}
+
 			}
 			System.out()
 		}
