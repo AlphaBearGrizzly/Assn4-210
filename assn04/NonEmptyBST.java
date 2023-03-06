@@ -20,13 +20,18 @@ public class NonEmptyBST<T extends Comparable<T>> implements BST<T> {
 	@Override
 	public BST<T> insert(T element) {
 		// one traverses i suppose through the Getters?
+		//element here works as a cur basically
 		while(_right != null  && _left != null){
 			if (T >= _element){
-				_element = _element.getRight();
+				_element = getRight();
 			}
 			if (T < _element){
 				_left = T;
+				_element = getLeft();
 			}
+		}
+		if(_right == null && _left != null){
+
 		}
 	}
 
