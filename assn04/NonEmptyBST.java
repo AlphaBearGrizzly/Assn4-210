@@ -46,22 +46,23 @@ public class NonEmptyBST<T extends Comparable<T>> implements BST<T> {
 	// TODO: remove
 	@Override
 	public BST<T> remove(T element) {
-// deleting function below
-		deleteGivenNode(element);         // helper fun. Deletes specific node.
-	}
-
-	void deleteGivenNode(T element) {            // helper fun. Deletes specific node. Does this give us a memory location?
-		if ((this.getLeft() == null) && (this.getRight() == null)) {  // case 1. leaf
-			element = null;
-		} else if ((this.getLeft() == null)) {  // case 2a. node to delete only has a right child
-			element = null;
-			_element = this.getRight();
-		} else if ((this.getRight() == null)) {  // case 2b. node to delete only has a left child
-			_element = this.getLeft(); //This is reassigns so that _element disappears!
-		} else {   // case 3. node has 2 children. Lets use successor from right.
-			BST<T> successor = findMinNode(this.getRight());
-			element = successor;
-			deleteGivenNode(successor); //here our recursion
+		if(this.getElement() == element){
+			if ((this.getLeft().isEmpty()) && (this.getRight().isEmpty())) {  // case 1. leaf
+				this = null;
+			} else if ((this.getLeft() == null)) {  // case 2a. node to delete only has a right child
+				this = this.getRight();
+			} else if ((this.getRight() == null)) {  // case 2b. node to delete only has a left child
+				this = this.getLeft();
+			} else {   // case 3. node has 2 children. Lets use successor from right.
+				BST<T> successor = findMinNode(this.getRight());
+				element = successor;
+			}
+		}
+		else-if (this.getElement() > element){
+			this = this.getLeft().remove(T element);
+		}
+		else-if (this.getElement() < element ){
+			this.getRight().remove(T element);
 		}
 	}
 
@@ -74,11 +75,6 @@ public class NonEmptyBST<T extends Comparable<T>> implements BST<T> {
 			return (findMinNode(thing.getLeft()));
 		}
 	}
-
-
-		// Deleting function above
-
-
 
 
 
