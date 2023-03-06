@@ -51,15 +51,15 @@ public class NonEmptyBST<T extends Comparable<T>> implements BST<T> {
 	}
 
 	void deleteGivenNode(T element) {            // helper fun. Deletes specific node. Does this give us a memory location?
-		if ((_left == null) && (_right == null)) {  // case 1. leaf
-			_element = null;
-		} else if ((_left == null)) {  // case 2a. node to delete only has a right child
+		if ((this.getLeft() == null) && (this.getRight() == null)) {  // case 1. leaf
 			element = null;
-			_element = _right;
-		} else if ((_right == null)) {  // case 2b. node to delete only has a left child
-			_element = _left; //This is reassigns so that _element disappears!
+		} else if ((this.getLeft() == null)) {  // case 2a. node to delete only has a right child
+			element = null;
+			_element = this.getRight();
+		} else if ((this.getRight() == null)) {  // case 2b. node to delete only has a left child
+			_element = this.getLeft(); //This is reassigns so that _element disappears!
 		} else {   // case 3. node has 2 children. Lets use successor from right.
-			BST<T> successor = findMinNode(_right);
+			BST<T> successor = findMinNode(this.getRight());
 			element = successor;
 			deleteGivenNode(successor); //here our recursion
 		}
@@ -68,12 +68,11 @@ public class NonEmptyBST<T extends Comparable<T>> implements BST<T> {
 
 
 	BST<T> findMinNode(BST<T> thing) {    // returns smallest node in tree starting at node
-		if (_left == null) {
+		if (thing.getLeft().getElement() == null) {
 			return (thing);
 		} else {
-			return (findMinNode(_left));
+			return (findMinNode(thing.getLeft()));
 		}
-		return this;
 	}
 
 
@@ -87,11 +86,13 @@ public class NonEmptyBST<T extends Comparable<T>> implements BST<T> {
 	// TODO: printPreOrderTraversal
 	@Override
 	public void printPreOrderTraversal() {
-		System.out.print(this.getElement());
-		this = this.getLeft();
-
-
-
+		System.out.print(this.getElement() + " ");
+		if(!this.getLeft().isEmpty()){
+			this.getLeft().printPreOrderTraversal();
+		}
+		if (!this.getRight().isEmpty()){
+			this.getRight().printPreOrderTraversal();
+		}
 	}
 
 
