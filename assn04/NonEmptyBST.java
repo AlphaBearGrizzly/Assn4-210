@@ -60,21 +60,21 @@ public class NonEmptyBST<T extends Comparable<T>> implements BST<T> {
 				this.getRight().remove(T element);
 			}
 		}
-			if ((this.getLeft().isEmpty()) && (this.getRight().isEmpty())) {  // case 1. leaf
-				return new EmptyBST<T>();
-			} else if ((this.getLeft().isEmpty()) || (this.getRight().isEmpty())) {  // case 2a. node to delete only has a right child
-				if(_left.isEmpty()){
-					return _right;
-				}
-					if(_right.isEmpty()){
-						return _left;
-					}
-			} else {   // case 3. node has 2 children. Lets use successor from right.
-				BST<T> successor = findMinNode(this.getRight());
-				this.getElement() = successor.getElement();
+		if ((this.getLeft().isEmpty()) && (this.getRight().isEmpty())) {  // case 1. leaf
+			return new EmptyBST<T>();
+		} else if ((this.getLeft().isEmpty()) || (this.getRight().isEmpty())) {  // case 2a. node to delete only has a right child
+			if(_left.isEmpty()){
+				return _right;
 			}
+			if(_right.isEmpty()){
+				return _left;
+			}
+		} else {   // case 3. node has 2 children. Lets use successor from right.
+			BST<T> successor = findMinNode(this.getRight());
+			this.getElement() = successor.getElement();
 		}
 	}
+}
 
 
 
@@ -140,7 +140,7 @@ public class NonEmptyBST<T extends Comparable<T>> implements BST<T> {
 
 	@Override
 	public int getHeight() {
-		   return Math.max(_left.getHeight(), _right.getHeight())+1;
+		return Math.max(_left.getHeight(), _right.getHeight())+1;
 	}
 
 
