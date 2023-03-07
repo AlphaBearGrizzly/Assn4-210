@@ -99,7 +99,7 @@ public class NonEmptyBST<T extends Comparable<T>> implements BST<T> {
 		if (!this.getRight().isEmpty()){
 			this.getRight().printPreOrderTraversal();
 		}
-	} //yeet
+	} //yeet ligma
 
 
 
