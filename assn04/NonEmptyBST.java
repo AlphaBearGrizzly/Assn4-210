@@ -46,23 +46,33 @@ public class NonEmptyBST<T extends Comparable<T>> implements BST<T> {
 	// TODO: remove
 	@Override
 	public BST<T> remove(T element) {
-		if(this.getElement() == element){
-			if ((this.getLeft().isEmpty()) && (this.getRight().isEmpty())) {  // case 1. leaf
-				this = null;
-			} else if ((this.getLeft() == null)) {  // case 2a. node to delete only has a right child
-				this = this.getRight();
-			} else if ((this.getRight() == null)) {  // case 2b. node to delete only has a left child
-				this = this.getLeft();
-			} else {   // case 3. node has 2 children. Lets use successor from right.
-				BST<T> successor = findMinNode(this.getRight());
-				element = successor;
+		if(!element.equals(_element)) {
+			if(_element.compareTo(element) > 0 ){
+				_right.remove(element);
+			}
+			else-if (this.getElement() < element ){
+				this.getRight().remove(T element);
+			})
+			else-if (this.getElement() > element){
+				this = this.getLeft().remove(T element);
+			}
+			else-if (this.getElement() < element ){
+				this.getRight().remove(T element);
 			}
 		}
-		else-if (this.getElement() > element){
-			this = this.getLeft().remove(T element);
-		}
-		else-if (this.getElement() < element ){
-			this.getRight().remove(T element);
+			if ((this.getLeft().isEmpty()) && (this.getRight().isEmpty())) {  // case 1. leaf
+				return new EmptyBST<T>();
+			} else if ((this.getLeft().isEmpty()) || (this.getRight().isEmpty())) {  // case 2a. node to delete only has a right child
+				if(_left.isEmpty()){
+					return _right;
+				}
+					if(_right.isEmpty()){
+						return _left;
+					}
+			} else {   // case 3. node has 2 children. Lets use successor from right.
+				BST<T> successor = findMinNode(this.getRight());
+				this.getElement() = successor.getElement();
+			}
 		}
 	}
 
