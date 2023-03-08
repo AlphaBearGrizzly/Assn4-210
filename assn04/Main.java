@@ -12,7 +12,9 @@ public class Main {
       bst = bst.insert(9);
       bst = bst.insert(4);
       bst.printPreOrderTraversal();
-
+      System.out.println("Break");
+      bst.remove(3);
+      bst.printPreOrderTraversal();
   }
 
 }

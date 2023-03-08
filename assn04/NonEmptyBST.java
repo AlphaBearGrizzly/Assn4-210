@@ -46,45 +46,40 @@ public class NonEmptyBST<T extends Comparable<T>> implements BST<T> {
 	// TODO: remove
 	@Override
 	public BST<T> remove(T element) {
-		if(!element.equals(_element)) {
-			if(_element.compareTo(element) > 0 ){
-				_right.remove(element);
-			}
-			else-if (this.getElement() < element ){
-				this.getRight().remove(T element);
-			})
-			else-if (this.getElement() > element){
-				this = this.getLeft().remove(T element);
-			}
-			else-if (this.getElement() < element ){
-				this.getRight().remove(T element);
-			}
+		if(isEmpty()){
+			return this;
 		}
-		if ((this.getLeft().isEmpty()) && (this.getRight().isEmpty())) {  // case 1. leaf
-			return new EmptyBST<T>();
-		} else if ((this.getLeft().isEmpty()) || (this.getRight().isEmpty())) {  // case 2a. node to delete only has a right child
-			if(_left.isEmpty()){
-				return _right;
+		if (!element.equals(_element)) {
+			if (_element.compareTo(element) > 0) {
+				_right = _right.remove(element);
+			} else if (_element.compareTo(element) < 0) {
+				_left = _left.remove(element);
 			}
-			if(_right.isEmpty()){
+		} else if (element.compareTo(_element) == 0) { // Ie they do equal
+			if ((_right.isEmpty())) { // cases where node have only one child
 				return _left;
+			} else if ((_left.isEmpty())) { // cases where node have only one child
+				return _right;
+			} else { // case 3. node has 2 children. Lets use successor from right.
+				NonEmptyBST<T> successor = findMinNode((NonEmptyBST<T>) _right);
+				_element = successor._element;
+				_right = _right.remove(successor._element);
 			}
-		} else {   // case 3. node has 2 children. Lets use successor from right.
-			BST<T> successor = findMinNode(this.getRight());
-			this.getElement() = successor.getElement();
 		}
+		return this;
 	}
-}
 
 
-
-	BST<T> findMinNode(BST<T> thing) {    // returns smallest node in tree starting at node
-		if (thing.getLeft().getElement() == null) {
-			return (thing);
+	NonEmptyBST<T> findMinNode(NonEmptyBST<T> thing) {    // returns smallest node in tree starting at node
+		if (thing.getLeft().isEmpty()) {
+			return(thing);
 		} else {
-			return (findMinNode(thing.getLeft()));
+			return findMinNode((NonEmptyBST<T>) thing.getLeft());
 		}
+
 	}
+
+
 
 
 
@@ -109,7 +104,9 @@ public class NonEmptyBST<T extends Comparable<T>> implements BST<T> {
 	@Override
 	public void printPostOrderTraversal() {
 
-
+		_left.printPreOrderTraversal();
+		_right.printPreOrderTraversal();
+		System.out.print(this.getElement() + " ");
 
 	}
 
